@@ -65,4 +65,21 @@ public class Excursao {
 
         throw new Exception("O valor precisa ser maior que 0.");
     }
+
+    public void cancelarReserva(String cpf, String nome) throws Exception {
+       if (this.reservas.contains((cpf + "/" + nome))) {
+           this.reservas.remove(cpf + "/" + nome);
+           return;
+       }
+
+       throw new Exception("Não foi possivel cancelar sua reserva, não há nenhuma reserva registrada no seu nome ou cpf");
+    }
+
+    public void cancelarReserva(String cpf) throws Exception {
+        if (this.reservas.removeIf(reserva -> (reserva.split("/")[0].contains((cpf))))){
+            return;
+        }
+
+        throw new Exception("Não foi possivel cancelar sua reserva, não há nenhuma reserva registrada no seu cpf");
+    }
 }
