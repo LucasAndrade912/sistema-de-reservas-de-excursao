@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Excursao {
     private int codigo;
@@ -24,6 +25,23 @@ public class Excursao {
         }
 
         throw new Exception("O código da excursão precisa ser maior que 0.");
+    }
+
+    public void criarReserva(String cpf, String nome) throws Exception {
+        if (this.reservas.size() == this.limiteDeReservas) {
+            throw new Exception("Limite de reservas atingido.");
+        }
+
+        for (String reserva : this.reservas) {
+            String nomeAtual = reserva.split("/")[1];
+
+            if (nomeAtual.equals(nome)) {
+                throw new Exception("Não pode haver nomes repetidos");
+            }
+        }
+
+        String reserva = cpf + "/" + nome;
+        this.reservas.add(reserva);
     }
 
     public void setPrecoPorPessoa(double precoPorPessoa) throws Exception {
