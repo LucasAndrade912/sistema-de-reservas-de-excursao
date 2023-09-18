@@ -1,3 +1,4 @@
+import java.awt.desktop.PreferencesEvent;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -64,5 +65,15 @@ public class Excursao {
         }
 
         throw new Exception("O valor precisa ser maior que 0.");
+    }
+
+    @Override
+    public String toString() {
+        return "Excursao{" +
+                "codigo=" + codigo +
+                ", precoPorPessoa=" + precoPorPessoa +
+                ", limiteDeReservas=" + limiteDeReservas +
+                ", totalDeReservas=" + reservas.size() +
+                '}';
     }
 }
