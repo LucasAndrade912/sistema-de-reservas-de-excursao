@@ -23,4 +23,21 @@ public class Excursao {
 
         throw new Exception("O código da excursão precisa ser maior que 0.");
     }
+
+
+    public void setPrecoPorPessoa(double precoPorPessoa) throws Exception {
+        if (precoPorPessoa > 0) {
+            this.precoPorPessoa = precoPorPessoa;
+        }
+
+        throw new Exception("O valor precisa ser maior que 0.");
+    }
+
+    public void setLimiteDeReservas(int limiteDeReservas) throws Exception {
+        if (limiteDeReservas > 0) {
+            this.limiteDeReservas = limiteDeReservas;
+        }
+
+        throw new Exception("O valor precisa ser maior que 0.");
+    }
 }
