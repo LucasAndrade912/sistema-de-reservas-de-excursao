@@ -44,6 +44,10 @@ public class Excursao {
         this.reservas.add(reserva);
     }
 
+    public double calcularValorTotal() {
+        return this.precoPorPessoa * this.reservas.size();
+    }
+
     public void setPrecoPorPessoa(double precoPorPessoa) throws Exception {
         if (precoPorPessoa > 0) {
             this.precoPorPessoa = precoPorPessoa;
