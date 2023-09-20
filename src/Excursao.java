@@ -43,8 +43,39 @@ public class Excursao {
         this.reservas.add(reserva);
     }
 
+    public ArrayList<String> listarReservasPorCpf(String digitos) {
+        if (digitos.isEmpty()) return this.reservas;
+
+        ArrayList<String> reservasPorCpf = new ArrayList<>();
+
+        for (String reserva : this.reservas) {
+            if (reserva.contains(digitos)) {
+                reservasPorCpf.add(reserva);
+            }
+        }
+
+        return reservasPorCpf;
+    }
+
     public double calcularValorTotal() {
         return this.precoPorPessoa * this.reservas.size();
+    }
+
+    public void cancelarReserva(String cpf, String nome) throws Exception {
+       if (this.reservas.contains((cpf + "/" + nome))) {
+           this.reservas.remove(cpf + "/" + nome);
+           return;
+       }
+
+       throw new Exception("Não foi possivel cancelar sua reserva, não há nenhuma reserva registrada no seu nome ou cpf");
+    }
+
+    public void cancelarReserva(String cpf) throws Exception {
+        if (this.reservas.removeIf(reserva -> (reserva.split("/")[0].contains((cpf))))){
+            return;
+        }
+
+        throw new Exception("Não foi possivel cancelar sua reserva, não há nenhuma reserva registrada no seu cpf");
     }
 
     public void setPrecoPorPessoa(double precoPorPessoa) throws Exception {
@@ -73,22 +104,5 @@ public class Excursao {
                 ", limiteDeReservas=" + limiteDeReservas +
                 ", totalDeReservas=" + reservas.size() +
                 '}';
-    }
-
-    public void cancelarReserva(String cpf, String nome) throws Exception {
-       if (this.reservas.contains((cpf + "/" + nome))) {
-           this.reservas.remove(cpf + "/" + nome);
-           return;
-       }
-
-       throw new Exception("Não foi possivel cancelar sua reserva, não há nenhuma reserva registrada no seu nome ou cpf");
-    }
-
-    public void cancelarReserva(String cpf) throws Exception {
-        if (this.reservas.removeIf(reserva -> (reserva.split("/")[0].contains((cpf))))){
-            return;
-        }
-
-        throw new Exception("Não foi possivel cancelar sua reserva, não há nenhuma reserva registrada no seu cpf");
     }
 }
