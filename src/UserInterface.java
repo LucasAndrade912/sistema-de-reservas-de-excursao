@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UserInterface {
     private JPanel mainPanel;
@@ -17,11 +15,15 @@ public class UserInterface {
     private JLabel cpfLabel;
     private JTextField cpfInput;
     private JButton criarReservaBtn;
-    private JButton cancelarReservaBtn;
+    private JButton cancelarReservaIndividualBtn;
     private JButton listarPorCpfBtn;
     private JButton listarPorNomeBbtn;
     private JButton calculaTotalBtn;
     private JLabel resultadoLabel;
+    private JButton resgatarExcursaoBtn;
+    private JButton cancelarReservaGrupoBtn;
+    private JButton salvarEmArquivoBtn;
+    private JButton carregarDoArquivoBtn;
 
     public UserInterface() {
 
