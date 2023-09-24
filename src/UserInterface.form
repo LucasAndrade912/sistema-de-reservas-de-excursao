@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="15" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="24" left="24" bottom="24" right="24"/>
     <constraints>
-      <xy x="20" y="20" width="680" height="556"/>
+      <xy x="20" y="20" width="680" height="586"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -17,13 +17,13 @@
           <text value="código:"/>
         </properties>
       </component>
-      <component id="8dbe2" class="javax.swing.JLabel" binding="precoLabel">
+      <component id="8dbe2" class="javax.swing.JLabel" binding="precoPorPessoaLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <labelFor value="515d0"/>
-          <text value="preço:"/>
+          <text value="preço p/ pessoa:"/>
         </properties>
       </component>
       <component id="5a400" class="javax.swing.JLabel" binding="limiteLabel">
@@ -51,7 +51,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="515d0" class="javax.swing.JTextField" binding="precoInput">
+      <component id="515d0" class="javax.swing.JTextField" binding="precoPorPessoaInput">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -140,14 +140,6 @@
           <text value="Limpar campos"/>
         </properties>
       </component>
-      <component id="380bd" class="javax.swing.JLabel" binding="resultadoLabel">
-        <constraints>
-          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value=""/>
-        </properties>
-      </component>
       <vspacer id="42b32">
         <constraints>
           <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
@@ -209,6 +201,14 @@
         </constraints>
         <properties>
           <text value="Carregar dados do arquivo"/>
+        </properties>
+      </component>
+      <component id="380bd" class="javax.swing.JLabel" binding="mensagemLabel">
+        <constraints>
+          <grid row="14" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="status:"/>
         </properties>
       </component>
     </children>
