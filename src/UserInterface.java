@@ -2,9 +2,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class UserInterface {
     private HashMap<Integer, Excursao> excursoes = new HashMap<>();
+    private Excursao excursaoAtual;
 
     private JPanel mainPanel;
     private JLabel codigoLabel;
@@ -29,6 +31,7 @@ public class UserInterface {
     private JButton cancelarReservaGrupoBtn;
     private JButton salvarEmArquivoBtn;
     private JButton carregarDoArquivoBtn;
+    private JLabel excursaoAtualLabel;
 
     public UserInterface() {
         criarExcursaoBtn.addActionListener(new ActionListener() {
@@ -58,6 +61,35 @@ public class UserInterface {
                     }
                 } catch (NumberFormatException numberFormatException) {
                     mensagemLabel.setText("status: Os valores dos campos devem ser numéricos.");
+                }
+            }
+        });
+
+        resgatarExcursaoBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigoText = codigoInput.getText();
+                limparCamposCriarExcursao();
+
+                if (codigoText.isEmpty()) {
+                    mensagemLabel.setText("status: Informe o código da excursão.");
+                    return;
+                }
+
+                try {
+                    int codigo = Integer.parseInt(codigoText);
+                    Excursao excursao = excursoes.get(codigo);
+
+                    if (Objects.isNull(excursao)) {
+                        mensagemLabel.setText("status: Excursão inexistente");
+                        return;
+                    }
+
+                    excursaoAtual = excursao;
+                    mensagemLabel.setText("status: Excursão " + codigo + " selecionada.");
+                    excursaoAtualLabel.setText("excursão atual: Excursão " + codigo);
+                } catch (NumberFormatException numberFormatException) {
+                    mensagemLabel.setText("status: O valores do campo deve ser numérico.");
                 }
             }
         });
