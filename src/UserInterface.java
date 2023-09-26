@@ -13,7 +13,7 @@ public class UserInterface {
     private JTextField codigoInput;
     private JTextField precoPorPessoaInput;
     private JTextField limiteInput;
-    private JButton limparBtn;
+    private JButton limparCamposExcursaoBtn;
     private JButton criarExcursaoBtn;
     private JLabel nomeLabel;
     private JTextField nomeInput;
@@ -29,6 +29,7 @@ public class UserInterface {
     private JButton cancelarReservaGrupoBtn;
     private JButton salvarEmArquivoBtn;
     private JButton carregarDoArquivoBtn;
+    private JButton limparCamposReservasBtn;
 
     public UserInterface() {
         criarExcursaoBtn.addActionListener(new ActionListener() {
@@ -61,12 +62,30 @@ public class UserInterface {
                 }
             }
         });
+        limparCamposExcursaoBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                limparCamposCriarExcursao();
+            }
+        });
+
+        limparCamposReservasBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                limparCamposReservas();
+            }
+        });
     }
 
     private void limparCamposCriarExcursao() {
         codigoInput.setText("");
         precoPorPessoaInput.setText("");
         limiteInput.setText("");
+    }
+
+    private void limparCamposReservas() {
+        nomeInput.setText("");
+        cpfInput.setText("");
     }
 
     public static void main(String[] args) {

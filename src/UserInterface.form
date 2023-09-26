@@ -132,7 +132,7 @@
           </grid>
         </constraints>
       </vspacer>
-      <component id="c26b8" class="javax.swing.JButton">
+      <component id="c26b8" class="javax.swing.JButton" binding="limparCamposReservasBtn">
         <constraints>
           <grid row="12" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -155,7 +155,7 @@
           <text value="Resgatar Excusão"/>
         </properties>
       </component>
-      <component id="11a08" class="javax.swing.JButton" binding="limparBtn">
+      <component id="11a08" class="javax.swing.JButton" binding="limparCamposExcursaoBtn">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
