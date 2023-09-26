@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
+import java.text.NumberFormat;
+import java.util.*;
 
 public class UserInterface {
     private HashMap<Integer, Excursao> excursoes = new HashMap<>();
@@ -34,6 +33,34 @@ public class UserInterface {
     private JButton carregarDoArquivoBtn;
     private JButton limparCamposReservasBtn;
     private JLabel excursaoAtualLabel;
+
+    {
+        // dados fakes temporários
+        try {
+            Excursao excursao1 = new Excursao(1, 15.00, 10);
+            excursao1.criarReserva("111", "Lucas");
+            excursao1.criarReserva("222", "Rodrigo");
+
+            Excursao excursao2 = new Excursao(2, 25.00, 30);
+            excursao2.criarReserva("111", "João");
+            excursao2.criarReserva("111", "Luiza");
+            excursao2.criarReserva("111", "Alana");
+            excursao2.criarReserva("333", "Marcos");
+
+            Excursao excursao3 = new Excursao(3, 470.00, 100);
+            excursao3.criarReserva("555", "Jorge");
+            excursao3.criarReserva("112", "Johnatan");
+
+            Excursao excursao4 = new Excursao(4, 5.00, 30);
+
+            excursoes.put(1, excursao1);
+            excursoes.put(2, excursao2);
+            excursoes.put(3, excursao3);
+            excursoes.put(4, excursao4);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public UserInterface() {
         criarExcursaoBtn.addActionListener(new ActionListener() {
@@ -166,6 +193,22 @@ public class UserInterface {
                 }
 
                 mensagemLabel.setText("status: " + usuariosFormatados);
+            }
+        });
+
+        calculaTotalBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (excursaoAtualEstaVazia()) {
+                    mensagemLabel.setText("status: Selecione uma excursão antes de cancelar uma reserva.");
+                    return;
+                }
+
+                double valorTotal = excursaoAtual.calcularValorTotal();
+                Locale localBrasil = new Locale("pt", "BR");
+                String valorEmReal = NumberFormat.getCurrencyInstance(localBrasil).format(valorTotal);
+
+                mensagemLabel.setText("status: " + valorEmReal);
             }
         });
     }
