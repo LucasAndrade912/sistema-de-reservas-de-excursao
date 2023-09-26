@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -137,6 +138,34 @@ public class UserInterface {
                 } catch (Exception ex) {
                     mensagemLabel.setText("status: Reserva inexistente neste nome ou cpf.");
                 }
+            }
+        });
+
+        listarPorNomeBbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (excursaoAtualEstaVazia()) {
+                    mensagemLabel.setText("status: Selecione uma excursão antes de realizar a listagem.");
+                    return;
+                }
+
+                String nomeText = nomeInput.getText();
+                limparCamposReservas();
+
+                ArrayList<String> usuarios = excursaoAtual.listarReservasPorNome(nomeText);
+                String usuariosFormatados = "";
+
+                if (usuarios.size() > 0) {
+                    for (String usuario : usuarios) {
+                        usuariosFormatados = usuariosFormatados.concat(usuario + "....");
+                    }
+
+                    usuariosFormatados = usuariosFormatados.substring(0, usuariosFormatados.length() - 4); // remove o último "...."
+                } else {
+                    usuariosFormatados = "Não existem usuários cadastrados nessa excursão";
+                }
+
+                mensagemLabel.setText("status: " + usuariosFormatados);
             }
         });
     }
