@@ -113,6 +113,32 @@ public class UserInterface {
                 limparCamposReservas();
             }
         });
+
+        cancelarReservaIndividualBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (excursaoAtualEstaVazia()) {
+                    mensagemLabel.setText("status: Selecione uma excursão antes de cancelar uma reserva.");
+                    return;
+                }
+
+                String nomeText = nomeInput.getText();
+                String cpfText = cpfInput.getText();
+                limparCamposReservas();
+
+                if (nomeText.isEmpty() || cpfText.isEmpty()) {
+                    mensagemLabel.setText("status: Informe nome e cpf para cancelar uma reserva.");
+                    return;
+                }
+
+                try {
+                    excursaoAtual.cancelarReserva(cpfText, nomeText);
+                    mensagemLabel.setText("status: Reserva individual cancelada com sucesso.");
+                } catch (Exception ex) {
+                    mensagemLabel.setText("status: Reserva inexistente neste nome ou cpf.");
+                }
+            }
+        });
     }
 
     private void limparCamposCriarExcursao() {
@@ -124,6 +150,10 @@ public class UserInterface {
     private void limparCamposReservas() {
         nomeInput.setText("");
         cpfInput.setText("");
+    }
+
+    private boolean excursaoAtualEstaVazia() {
+        return Objects.isNull(excursaoAtual);
     }
 
     public static void main(String[] args) {
