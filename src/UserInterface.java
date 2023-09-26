@@ -50,6 +50,12 @@ public class UserInterface {
 
                 try {
                     int codigo = Integer.parseInt(codigoText);
+
+                    if (Objects.nonNull(excursoes.get(codigo))) {
+                        mensagemLabel.setText("status: Este código já existe, informe outro.");
+                        return;
+                    }
+
                     double preco = Double.parseDouble(precoPorPessoaText);
                     int limiteReservas = Integer.parseInt(limiteText);
 
