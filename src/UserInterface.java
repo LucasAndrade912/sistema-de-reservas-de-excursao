@@ -178,6 +178,10 @@ public class UserInterface {
 
                 String nomeText = nomeInput.getText();
                 limparCamposReservas();
+                if (nomeText.isEmpty()) {
+                    mensagemLabel.setText("status: Digite um nome para a realização da busca");
+                    return;
+                }
 
                 ArrayList<String> usuarios = excursaoAtual.listarReservasPorNome(nomeText);
                 String usuariosFormatados = "";
@@ -229,6 +233,61 @@ public class UserInterface {
                 } catch (Exception ex) {
                     mensagemLabel.setText(ex.getMessage());
                     limparCamposReservas();
+                }
+            }
+        });
+
+        listarPorCpfBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (excursaoAtualEstaVazia()) {
+                    mensagemLabel.setText("status: Selecione uma excursão antes de realizar a listagem.");
+                    return;
+                }
+
+                String cpfText = cpfInput.getText();
+                limparCamposReservas();
+                if (cpfText.isEmpty()) {
+                    mensagemLabel.setText("status: Digite um cpf para a realização da busca");
+                    return;
+                }
+
+                ArrayList<String> usuarios = excursaoAtual.listarReservasPorCpf(cpfText);
+                String usuariosFormatados = "";
+
+                if (!usuarios.isEmpty()) {
+                    for (String usuario : usuarios) {
+                        usuariosFormatados = usuariosFormatados.concat(usuario + "....");
+                    }
+
+                    usuariosFormatados = usuariosFormatados.substring(0, usuariosFormatados.length() - 4); // remove o último "...."
+                } else {
+                    usuariosFormatados = "Não existem usuários cadastrados nessa excursão com esse nome";
+                }
+
+                mensagemLabel.setText("status: " + usuariosFormatados);
+            }
+        });
+        cancelarReservaGrupoBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (excursaoAtualEstaVazia()) {
+                    mensagemLabel.setText("status: Selecione uma excursão antes de cancelar uma reserva.");
+                    return;
+                }
+
+                String cpfText = cpfInput.getText();
+                limparCamposReservas();
+                if (cpfText.isEmpty()) {
+                    mensagemLabel.setText("status: Digite um cpf para a cancelar  todas as reservas nesse cpf");
+                    return;
+                }
+
+                try {
+                    excursaoAtual.cancelarReserva(cpfText);
+                    mensagemLabel.setText("status: Todas as reservas nesse cpf cancelada com sucesso.");
+                } catch (Exception ex) {
+                    mensagemLabel.setText("status: " + ex.getMessage());
                 }
             }
         });
