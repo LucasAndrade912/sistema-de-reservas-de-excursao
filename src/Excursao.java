@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 // Classe excursão
@@ -15,6 +17,9 @@ public class Excursao {
             this.codigo = codigo;
             this.precoPorPessoa = precoPorPessoa;
             this.limiteDeReservas = limiteDeReservas;
+            File f = new File(new File(".//arquivos/" + codigo + ".txt").getCanonicalPath()); // pasta do projeto
+            FileWriter arq = new FileWriter(f, true); // abrir arquivo para adição de dados
+            arq.close();
             return;
         }
 
