@@ -92,7 +92,7 @@ public class UserInterface {
                         excursoes.put(codigo, novaExcursao);
                         mensagemLabel.setText("status: Excursão criada com sucesso!");
                     } catch (Exception e) {
-                        mensagemLabel.setText("status: Os dados da excursão devem ser positivos.");
+                        mensagemLabel.setText("status: " + e.getMessage());
                     }
                 } catch (NumberFormatException numberFormatException) {
                     mensagemLabel.setText("status: Os valores dos campos devem ser numéricos.");
@@ -163,7 +163,7 @@ public class UserInterface {
                     excursaoAtual.cancelarReserva(cpfText, nomeText);
                     mensagemLabel.setText("status: Reserva individual cancelada com sucesso.");
                 } catch (Exception ex) {
-                    mensagemLabel.setText("status: Reserva inexistente neste nome ou cpf.");
+                    mensagemLabel.setText("status: " + ex.getMessage());
                 }
             }
         });
@@ -182,7 +182,7 @@ public class UserInterface {
                 ArrayList<String> usuarios = excursaoAtual.listarReservasPorNome(nomeText);
                 String usuariosFormatados = "";
 
-                if (usuarios.size() > 0) {
+                if (!usuarios.isEmpty()) {
                     for (String usuario : usuarios) {
                         usuariosFormatados = usuariosFormatados.concat(usuario + "....");
                     }
@@ -209,6 +209,27 @@ public class UserInterface {
                 String valorEmReal = NumberFormat.getCurrencyInstance(localBrasil).format(valorTotal);
 
                 mensagemLabel.setText("status: " + valorEmReal);
+            }
+        });
+
+        criarReservaBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (excursaoAtualEstaVazia()) {
+                    mensagemLabel.setText("status: Selecione uma excursão antes de realizar a reserva.");
+                    return;
+                }
+
+                try {
+                    String nome = nomeInput.getText();
+                    String cpf = cpfInput.getText();
+                    excursaoAtual.criarReserva(cpf, nome);
+                    mensagemLabel.setText("status: A reserva no nome de "  + nome + " e no cpf " + cpf + " foi criada.");
+                    limparCamposReservas();
+                } catch (Exception ex) {
+                    mensagemLabel.setText(ex.getMessage());
+                    limparCamposReservas();
+                }
             }
         });
     }
