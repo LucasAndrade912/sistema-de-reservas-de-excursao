@@ -1,6 +1,0 @@
-Preço por Pessoa: 25.0
-Limite de Reservas: 30
-111/João
-111/Luiza
-111/Alana
-333/Marcos
