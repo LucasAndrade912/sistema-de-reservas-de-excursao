@@ -1,29 +1,26 @@
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-// Classe excursão
 public class Excursao {
-
     // Inicializador de variáveis
     private int codigo;
     private double precoPorPessoa;
     private int limiteDeReservas;
     private ArrayList<String> reservas = new ArrayList<>();
 
-    // Construtor da Classe
     public Excursao(int codigo, double precoPorPessoa, int limiteDeReservas) throws Exception {
         if (codigo > 0 && precoPorPessoa > 0 && limiteDeReservas > 0) {
             this.codigo = codigo;
             this.precoPorPessoa = precoPorPessoa;
             this.limiteDeReservas = limiteDeReservas;
 
-            // Criando os arquivos
-            File f = new File(new File(".//arquivos/" + codigo + ".txt").getCanonicalPath()); // pasta do projeto
-            FileWriter arq = new FileWriter(f, false); // abrir arquivo para adição de dados
-            arq.write("Preço por Pessoa: " + precoPorPessoa + "\n");
-            arq.write("Limite de Reservas: " + limiteDeReservas + "\n");
+            String filePath = new File("arquivos/" + codigo + ".txt").getCanonicalPath();
+            FileWriter arq = new FileWriter(filePath, false);
+
+            arq.write(precoPorPessoa + "\n");
+            arq.write(limiteDeReservas + "\n");
             arq.close();
             return;
         }
@@ -31,10 +28,10 @@ public class Excursao {
         throw new Exception("Os dados passados para excursão precisam ser maior que 0.");
     }
 
-    // Construtor da classe com apenas o código
     public Excursao(int codigo) throws Exception {
         if (codigo > 0) {
             this.codigo = codigo;
+            this.carregar();
             return;
         }
 
@@ -134,21 +131,44 @@ public class Excursao {
         throw new Exception("O valor precisa ser maior que 0.");
     }
 
-    public void salvar() throws IOException {
-        File f = new File(new File(".//arquivos/" + codigo + ".txt").getCanonicalPath()); // pasta do projeto
-        FileWriter arq = new FileWriter(f, false); // abrir arquivo para adição de dados
-        arq.write("Preço por Pessoa: " + precoPorPessoa + "\n");
-        arq.write("Limite de Reservas: " + limiteDeReservas + "\n");
+    public void salvar() throws Exception {
+        String filePath = new File("arquivos/" + codigo + ".txt").getCanonicalPath();
+        FileWriter arq = new FileWriter(filePath, false);
 
-        if (reservas.size() > 0) {
-            for (int i = 0; i < reservas.size(); i++) {
-                arq.write(reservas.get(i) + "\n");
+        arq.write(precoPorPessoa + "\n");
+        arq.write(limiteDeReservas + "\n");
+
+        if (!reservas.isEmpty()) {
+            for (String reserva : reservas) {
+                arq.write(reserva + "\n");
             }
         }
+
         arq.close();
     }
 
-    //  Transforma tudo em string
+    public void carregar() throws Exception {
+        File file = new File("arquivos/" + codigo + ".txt");
+        Scanner reader = new Scanner(file);
+        int i = 0;
+
+        while (reader.hasNextLine()) {
+            String linha = reader.nextLine();
+
+            if (i == 0) {
+                setPrecoPorPessoa(Double.parseDouble(linha));
+                i++;
+            } else if (i == 1) {
+                setLimiteDeReservas(Integer.parseInt(linha));
+                i++;
+            } else {
+                reservas.add(linha);
+            }
+        }
+
+        reader.close();
+    }
+
     @Override
     public String toString() {
         return "Excursao{" +
