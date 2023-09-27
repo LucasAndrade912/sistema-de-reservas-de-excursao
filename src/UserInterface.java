@@ -178,10 +178,10 @@ public class UserInterface {
 
                 String nomeText = nomeInput.getText();
                 limparCamposReservas();
-                if (nomeText.isEmpty()) {
+                /*if (nomeText.isEmpty()) {
                     mensagemLabel.setText("status: Digite um nome para a realização da busca");
                     return;
-                }
+                } */
 
                 ArrayList<String> usuarios = excursaoAtual.listarReservasPorNome(nomeText);
                 String usuariosFormatados = "";

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 // Classe excursão
@@ -17,8 +18,12 @@ public class Excursao {
             this.codigo = codigo;
             this.precoPorPessoa = precoPorPessoa;
             this.limiteDeReservas = limiteDeReservas;
+
+            // Criando os arquivos
             File f = new File(new File(".//arquivos/" + codigo + ".txt").getCanonicalPath()); // pasta do projeto
-            FileWriter arq = new FileWriter(f, true); // abrir arquivo para adição de dados
+            FileWriter arq = new FileWriter(f, false); // abrir arquivo para adição de dados
+            arq.write("Preço por Pessoa: " + precoPorPessoa + "\n");
+            arq.write("Limite de Reservas: " + limiteDeReservas + "\n");
             arq.close();
             return;
         }
@@ -52,6 +57,7 @@ public class Excursao {
 
         String reserva = cpf + "/" + nome;
         this.reservas.add(reserva);
+        salvar();
     }
 
 //    Listar as reservas por cpf
@@ -128,7 +134,21 @@ public class Excursao {
         throw new Exception("O valor precisa ser maior que 0.");
     }
 
-//  Transforma tudo em string
+    public void salvar() throws IOException {
+        File f = new File(new File(".//arquivos/" + codigo + ".txt").getCanonicalPath()); // pasta do projeto
+        FileWriter arq = new FileWriter(f, false); // abrir arquivo para adição de dados
+        arq.write("Preço por Pessoa: " + precoPorPessoa + "\n");
+        arq.write("Limite de Reservas: " + limiteDeReservas + "\n");
+
+        if (reservas.size() > 0) {
+            for (int i = 0; i < reservas.size(); i++) {
+                arq.write(reservas.get(i) + "\n");
+            }
+        }
+        arq.close();
+    }
+
+    //  Transforma tudo em string
     @Override
     public String toString() {
         return "Excursao{" +
