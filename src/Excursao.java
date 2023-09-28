@@ -96,6 +96,7 @@ public class Excursao {
     public void cancelarReserva(String cpf, String nome) throws Exception {
        if (this.reservas.contains((cpf + "/" + nome))) {
            this.reservas.remove(cpf + "/" + nome);
+           salvar();
            return;
        }
 
@@ -105,6 +106,7 @@ public class Excursao {
 //  Cancelar as reservas por cpf
     public void cancelarReserva(String cpf) throws Exception {
         if (this.reservas.removeIf(reserva -> (reserva.split("/")[0].contains((cpf))))){
+            salvar();
             return;
         }
 

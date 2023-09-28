@@ -30,8 +30,6 @@ public class UserInterface {
     private JLabel mensagemLabel;
     private JButton resgatarExcursaoBtn;
     private JButton cancelarReservaGrupoBtn;
-    private JButton salvarEmArquivoBtn;
-    private JButton carregarDoArquivoBtn;
     private JButton limparCamposReservasBtn;
     private JLabel excursaoAtualLabel;
 
@@ -39,13 +37,15 @@ public class UserInterface {
         File pastaArquivos = new File("arquivos");
         File[] arquivos = pastaArquivos.listFiles();
 
-        for (File arquivo : arquivos) {
-            int codigo = Integer.parseInt(arquivo.getName().split("\\.")[0]);
+        if (arquivos.length >  0) {
+            for (File arquivo : arquivos) {
+                int codigo = Integer.parseInt(arquivo.getName().split("\\.")[0]);
 
-            try {
-                excursoes.put(codigo, new Excursao(codigo));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                try {
+                    excursoes.put(codigo, new Excursao(codigo));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
 
