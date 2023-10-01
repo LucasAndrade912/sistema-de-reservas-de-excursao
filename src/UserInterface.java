@@ -37,7 +37,7 @@ public class UserInterface {
         File pastaArquivos = new File("arquivos");
         File[] arquivos = pastaArquivos.listFiles();
 
-        if (arquivos.length >  0) {
+        if (Objects.nonNull(arquivos)) {
             for (File arquivo : arquivos) {
                 int codigo = Integer.parseInt(arquivo.getName().split("\\.")[0]);
 
@@ -47,6 +47,8 @@ public class UserInterface {
                     throw new RuntimeException(e);
                 }
             }
+        } else {
+            pastaArquivos.mkdir();
         }
 
         criarExcursaoBtn.addActionListener(new ActionListener() {
@@ -76,7 +78,9 @@ public class UserInterface {
                     try {
                         Excursao novaExcursao = new Excursao(codigo, preco, limiteReservas);
                         excursoes.put(codigo, novaExcursao);
+                        excursaoAtual = excursoes.get(codigo);
                         mensagemLabel.setText("status: Excursão criada com sucesso!");
+                        excursaoAtualLabel.setText("excursão atual: Excursão " + codigo);
                     } catch (Exception e) {
                         mensagemLabel.setText("status: " + e.getMessage());
                     }
