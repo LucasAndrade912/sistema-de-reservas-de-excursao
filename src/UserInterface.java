@@ -168,10 +168,6 @@ public class UserInterface {
 
                 String nomeText = nomeInput.getText();
                 limparCamposReservas();
-                if (nomeText.isEmpty()) {
-                    mensagemLabel.setText("status: Digite um nome para a realização da busca");
-                    return;
-                }
 
                 ArrayList<String> usuarios = excursaoAtual.listarReservasPorNome(nomeText);
                 String usuariosFormatados = "";
@@ -237,10 +233,6 @@ public class UserInterface {
 
                 String cpfText = cpfInput.getText();
                 limparCamposReservas();
-                if (cpfText.isEmpty()) {
-                    mensagemLabel.setText("status: Digite um cpf para a realização da busca");
-                    return;
-                }
 
                 ArrayList<String> usuarios = excursaoAtual.listarReservasPorCpf(cpfText);
                 String usuariosFormatados = "";
